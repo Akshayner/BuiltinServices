@@ -14,16 +14,18 @@ class WifiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wifi)
 
-        var wm = getSystemService(Context.WIFI_SERVICE) as WifiManager
+        var wm = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
         var status = wm.wifiState
-        if (status == 0){
-            Toast.makeText(this@WifiActivity,"Wifi is disabled",Toast.LENGTH_LONG).show()
-            // wifi off
+        if (status == 0 || status == 1){
+            swi.isChecked = false
         }
-        else if(status == 3){
-            Toast.makeText(this@WifiActivity,"Wifi is enabled",Toast.LENGTH_LONG).show()
-            //wifi on
+        else if(status == 2 || status == 3){
+            swi.isChecked = true
+        }
+
+        swi.setOnCheckedChangeListener { compoundButton, b ->
+            wm.setWifiEnabled(b)
         }
 
         b1.setOnClickListener {
@@ -39,7 +41,7 @@ class WifiActivity : AppCompatActivity() {
         }
 
         b2.setOnClickListener{
-            var result =wm.configuredNetworks
+            var result = wm.configuredNetworks
             var list = mutableListOf<String>()
 
             for (device in result){
