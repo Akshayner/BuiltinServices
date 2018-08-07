@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity() {
         b5.setOnClickListener {
             vibrate()
         }
+        b6.setOnClickListener {
+            val i = Intent(this@MainActivity,BluetoothActivity::class.java)
+            startActivity(i)
+        }
 
 
     } ///oncreate

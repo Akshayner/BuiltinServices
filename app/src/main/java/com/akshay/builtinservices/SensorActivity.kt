@@ -17,7 +17,7 @@ class SensorActivity : AppCompatActivity() {
         
         var sm = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         
-        var sensor = sm.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        var sensor = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         
         sm.registerListener(object : SensorEventListener {
             override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
