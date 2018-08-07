@@ -33,7 +33,7 @@ class WifiActivity : AppCompatActivity() {
             var list = mutableListOf<String>()
 
             for (device in result){
-            list.add(device.SSID+System.lineSeparator()+device.frequency)
+            list.add(device.SSID+System.lineSeparator()+device.frequency.toString())
             }
 
             var mya = ArrayAdapter<String>(this@WifiActivity,android.R.layout.simple_list_item_single_choice,list)
@@ -45,7 +45,7 @@ class WifiActivity : AppCompatActivity() {
             var list = mutableListOf<String>()
 
             for (device in result){
-                list.add(device.SSID+System.lineSeparator()+device.status)
+                list.add(device.SSID+System.lineSeparator()+device.status.toString())
             }
 
             var mya = ArrayAdapter<String>(this@WifiActivity,android.R.layout.simple_list_item_single_choice,list)
