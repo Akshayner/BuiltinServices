@@ -35,11 +35,11 @@ class BluetoothActivity : AppCompatActivity() {
 
         }
 
-        var list = mutableListOf<String>()
-        var mya = ArrayAdapter<String>(this@BluetoothActivity,android.R.layout.simple_list_item_single_choice,list)
-        lv.adapter = mya
-
         b1.setOnClickListener {
+            var list = mutableListOf<String>()
+            var mya = ArrayAdapter<String>(this@BluetoothActivity,android.R.layout.simple_list_item_single_choice,list)
+            lv.adapter = mya
+            
             bAdapter.startDiscovery()
             var filter = IntentFilter()
             filter.addAction(BluetoothDevice.ACTION_FOUND)
