@@ -5,7 +5,6 @@ import android.net.wifi.WifiManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_wifi.*
 
 class WifiActivity : AppCompatActivity() {
@@ -33,7 +32,7 @@ class WifiActivity : AppCompatActivity() {
             var list = mutableListOf<String>()
 
             for (device in result){
-            list.add(device.SSID+System.lineSeparator()+device.frequency.toString())
+            list.add(device.SSID+"/n"+device.frequency.toString())
             }
 
             var mya = ArrayAdapter<String>(this@WifiActivity,android.R.layout.simple_list_item_single_choice,list)
@@ -45,7 +44,7 @@ class WifiActivity : AppCompatActivity() {
             var list = mutableListOf<String>()
 
             for (device in result){
-                list.add(device.SSID+System.lineSeparator()+device.status.toString())
+                list.add(device.SSID+"/n"+device.status.toString())
             }
 
             var mya = ArrayAdapter<String>(this@WifiActivity,android.R.layout.simple_list_item_single_choice,list)
