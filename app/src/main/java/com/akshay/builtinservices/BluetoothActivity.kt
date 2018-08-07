@@ -19,20 +19,38 @@ class BluetoothActivity : AppCompatActivity() {
 
         var bAdapter = BluetoothAdapter.getDefaultAdapter()
 
+        var status = bAdapter.isEnabled
+        if (status == true){
+            sw.isChecked = true
+        }
+        else{
+            sw.isChecked = false
+        }
+
+        sw.setOnCheckedChangeListener { compoundButton, b ->
+            if (b== true)
+                bAdapter.enable()
+            else
+                bAdapter.disable()
+
+        }
+
         var list = mutableListOf<String>()
         var mya = ArrayAdapter<String>(this@BluetoothActivity,android.R.layout.simple_list_item_single_choice,list)
         lv.adapter = mya
 
-        bAdapter.startDiscovery()
-        var filter = IntentFilter()
-        filter.addAction(BluetoothDevice.ACTION_FOUND)
-        registerReceiver(object : BroadcastReceiver() {
-            override fun onReceive(p0: Context?, p1: Intent?) {
-                var device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
-                list.add(device.name+"/n"+device.address)
-                mya.notifyDataSetChanged()
-            }
-        },filter)
+        b1.setOnClickListener {
+            bAdapter.startDiscovery()
+            var filter = IntentFilter()
+            filter.addAction(BluetoothDevice.ACTION_FOUND)
+            registerReceiver(object : BroadcastReceiver() {
+                override fun onReceive(p0: Context?, p1: Intent?) {
+                    var device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
+                    list.add(device.name + "/n" + device.address)
+                    mya.notifyDataSetChanged()
+                }
+            }, filter)
+        }
 
     }
 }
